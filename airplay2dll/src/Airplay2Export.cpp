@@ -1,12 +1,14 @@
 #include "Airplay2Head.h"
 #include "FgAirplayServer.h"
+#include <cassert>
 
 void* fgServerStart(const char serverName[AIRPLAY_NAME_LEN], 
 	unsigned int raopPort, unsigned int airplayPort,
 	IAirServerCallback* callback) 
 {
 	FgAirplayServer* pServer = new FgAirplayServer();
-	pServer->start(serverName, raopPort, airplayPort, callback);
+	auto ret = pServer->start(serverName, raopPort, airplayPort, callback);
+	assert(ret == 0);
 	return pServer;
 }
 

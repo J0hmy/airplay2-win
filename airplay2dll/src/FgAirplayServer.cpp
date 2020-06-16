@@ -3,6 +3,7 @@
 #include "Airplay2Head.h"
 #include <thread>
 #include "CAutoLock.h"
+#include <cassert>
 
 #ifdef WIN32
 #include   "iphlpapi.h"  
@@ -96,6 +97,7 @@ int FgAirplayServer::start(const char serverName[AIRPLAY_NAME_LEN],
 		raop_set_port(m_pRaop, raop_port);
 
 		m_pDnsSd = dnssd_init(&ret);
+		assert(m_pDnsSd);
 		if (m_pDnsSd == NULL) {
 			ret = -1;
 			break;
@@ -116,7 +118,7 @@ int FgAirplayServer::start(const char serverName[AIRPLAY_NAME_LEN],
 		stop();
 	}
 
-	return 0;
+	return ret;
 }
 
 void FgAirplayServer::stop()
@@ -188,6 +190,7 @@ void FgAirplayServer::connected(void* cls, const char* remoteName, const char* r
 	{
 		return;
 	}
+	printf("#%d device: name=%s id=%s\n", ++pServer->count, remoteName, remoteDeviceId);
 	CAutoLock oLock(pServer->m_mutexMap, "connected");
 	pServer->getChannel(remoteDeviceId);
 

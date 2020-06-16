@@ -24,3 +24,6 @@ Migrate [AirplayServer](https://github.com/KqSMea8/AirplayServer) and [dnssd](ht
 
   确保iOS和Windows处于同一个Wi-Fi，同一个网段下。如果Windows是在虚拟机中运行，确保使用的是桥接网络，而不是共享网络。
   
+- 无法被iOS设备发现
+
+  运行前，需要先安装压缩包内的 Apple Bonjour 广播服务 , 安装目录中的 Bonjour64.msi 或 Bonjour.msi 即可（看操作系统是否为 64 位）。

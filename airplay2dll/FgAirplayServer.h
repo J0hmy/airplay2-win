@@ -59,5 +59,6 @@ protected:
 
 	float					m_fScaleRatio;
 	FgAirplayChannelMap		m_mapChannel;
+	int count = 0;
 };
 
